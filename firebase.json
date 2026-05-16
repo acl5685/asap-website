@@ -1,0 +1,20 @@
+{
+  "hosting": {
+    "site": "asap-platform",
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      ".firebase",
+      ".claude",
+      ".firebaserc"
+    ],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          { "key": "Cache-Control", "value": "max-age=3600" }
+        ]
+      }
+    ]
+  }
+}

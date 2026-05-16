@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASAP Brand Style Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital@1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy: #0f2b4a;
+      --deep-teal: #1e5a8a;
+      --teal: #3db5a6;
+      --teal-dark: #2a8a7e;
+      --light-teal: #5fd4c4;
+      --white: #ffffff;
+      --gray-100: #f5f7f9;
+      --gray-300: #d0d5dc;
+      --gray-500: #6b7785;
+      --gray-700: #3a4553;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--navy);
+      background: var(--white);
+    }
+
+    /* ── Page structure ── */
+    .page {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+    }
+
+    .page:last-child {
+      page-break-after: avoid;
+    }
+
+    /* ── Header / Footer (inner pages) ── */
+    .page-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 48px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      border-bottom: 1px solid var(--gray-300);
+      z-index: 10;
+    }
+
+    .page-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 48px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      border-top: 1px solid var(--gray-300);
+      z-index: 10;
+    }
+
+    /* ── Sidebar label ── */
+    .sidebar-label {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      border-right: 1px solid var(--gray-300);
+    }
+
+    .sidebar-label span {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--gray-500);
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Inner page content area ── */
+    .page-content {
+      position: absolute;
+      top: 70px;
+      bottom: 70px;
+      left: 64px;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 48px;
+    }
+
+    .page-content.no-sidebar {
+      left: 0;
+    }
+
+    /* ═══════════════════════════════════════
+       PAGE 1 — COVER
+    ═══════════════════════════════════════ */
+    .cover {
+      background: linear-gradient(145deg, #081c30 0%, var(--navy) 30%, var(--deep-teal) 70%, var(--teal-dark) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--white);
+    }
+
+    .cover-logo {
+      width: 340px;
+      max-width: 50%;
+      margin-bottom: 48px;
+      filter: brightness(0) invert(1);
+    }
+
+    .cover-divider {
+      width: 80px;
+      height: 2px;
+      background: var(--teal);
+      margin-bottom: 40px;
+    }
+
+    .cover-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 42px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .cover-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 20px;
+      color: var(--light-teal);
+      letter-spacing: 0.02em;
+    }
+
+    .cover-footer {
+      position: absolute;
+      bottom: 40px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ═══════════════════════════════════════
+       PAGE 2 — LOGO SUITE
+    ═══════════════════════════════════════ */
+    .logo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 24px;
+      width: 100%;
+      height: 100%;
+    }
+
+    .logo-cell {
+      border: 1px solid var(--gray-300);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      position: relative;
+      background: var(--white);
+    }
+
+    .logo-cell.dark-bg {
+      background: var(--navy);
+      border-color: var(--navy);
+    }
+
+    .logo-cell img {
+      max-width: 220px;
+      max-height: 80px;
+      object-fit: contain;
+    }
+
+    .logo-cell.dark-bg img {
+      filter: brightness(0) invert(1);
+    }
+
+    .logo-cell-label {
+      position: absolute;
+      bottom: 16px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    .logo-cell.dark-bg .logo-cell-label {
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ═══════════════════════════════════════
+       PAGE 3 — COLOR PALETTE
+    ═══════════════════════════════════════ */
+    .color-row {
+      display: flex;
+      gap: 20px;
+      width: 100%;
+      height: 70%;
+    }
+
+    .color-card {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--gray-300);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .color-swatch {
+      flex: 1;
+      min-height: 55%;
+    }
+
+    .color-info {
+      padding: 16px 18px;
+      background: var(--white);
+    }
+
+    .color-type {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-bottom: 6px;
+    }
+
+    .color-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .color-use {
+      font-family: 'Inter', sans-serif;
+      font-size: 10.5px;
+      color: var(--gray-500);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .color-values {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .color-val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--gray-700);
+    }
+
+    .color-val span {
+      color: var(--gray-500);
+      font-weight: 400;
+      margin-right: 4px;
+    }
+
+    /* ═══════════════════════════════════════
+       PAGE 4 — TYPEFACES
+    ═══════════════════════════════════════ */
+    .type-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .type-row {
+      display: flex;
+      align-items: center;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--gray-300);
+    }
+
+    .type-row:last-child {
+      border-bottom: none;
+    }
+
+    .type-meta {
+      width: 340px;
+      flex-shrink: 0;
+      padding-right: 40px;
+    }
+
+    .type-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal-dark);
+      margin-bottom: 6px;
+    }
+
+    .type-spec {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: var(--gray-500);
+      line-height: 1.6;
+    }
+
+    .type-sample {
+      flex: 1;
+    }
+
+    .type-sample-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 36px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+
+    .type-sample-subheader {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 22px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+
+    .type-sample-heading {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 500;
+      font-size: 20px;
+      color: var(--navy);
+    }
+
+    .type-sample-body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 15px;
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════════════════════════
+       PAGE 5 — BRAND VOICE
+    ═══════════════════════════════════════ */
+    .voice-content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .voice-section {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--gray-300);
+    }
+
+    .voice-section:last-child {
+      border-bottom: none;
+    }
+
+    .voice-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal-dark);
+      margin-bottom: 16px;
+    }
+
+    .tone-pills {
+      display: flex;
+      gap: 16px;
+    }
+
+    .tone-pill {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: 0.04em;
+      color: var(--navy);
+      padding: 14px 36px;
+      border: 2px solid var(--gray-300);
+      border-radius: 50px;
+    }
+
+    .voice-columns {
+      display: flex;
+      gap: 48px;
+    }
+
+    .voice-col {
+      flex: 1;
+    }
+
+    .voice-col-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .voice-col-title.positive {
+      color: var(--teal-dark);
+    }
+
+    .voice-col-title.negative {
+      color: #c0392b;
+    }
+
+    .voice-words {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .voice-word {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      color: var(--gray-700);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .tagline-display {
+      text-align: center;
+      padding: 24px 0;
+    }
+
+    .tagline-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 36px;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .tagline-note {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+    }
+
+    /* ═══════════════════════════════════════
+       PRINT STYLES
+    ═══════════════════════════════════════ */
+    @media print {
+      @page {
+        size: landscape;
+        margin: 0;
+      }
+
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .page {
+        height: 100vh;
+        page-break-after: always;
+        page-break-inside: avoid;
+      }
+
+      .page:last-child {
+        page-break-after: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════════
+       PAGE 1 — COVER
+  ════════════════════════════════════════════ -->
+  <div class="page cover">
+    <img src="asap-logo.svg" alt="ASAP Logo" class="cover-logo">
+    <div class="cover-divider"></div>
+    <div class="cover-title">Brand Guide</div>
+    <div class="cover-tagline">"The New Pace of Progress"</div>
+    <div class="cover-footer">ASAP LLC &mdash; 2026</div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       PAGE 2 — LOGO SUITE
+  ════════════════════════════════════════════ -->
+  <div class="page">
+    <div class="page-header">
+      <span>Brand Style Guide</span>
+      <span>Page / 02</span>
+    </div>
+    <div class="sidebar-label"><span>Logo Suite</span></div>
+    <div class="page-content">
+      <div class="logo-grid">
+        <div class="logo-cell">
+          <img src="asap-logo.svg" alt="ASAP Primary Logo">
+          <div class="logo-cell-label">Primary Logo</div>
+        </div>
+        <div class="logo-cell">
+          <img src="asap-globe.svg" alt="ASAP Globe Icon" style="max-width:90px;">
+          <div class="logo-cell-label">Secondary Logo</div>
+        </div>
+        <div class="logo-cell">
+          <img src="zone-genie-logo.png" alt="Zone Genie Logo">
+          <div class="logo-cell-label">Product Logo</div>
+        </div>
+        <div class="logo-cell dark-bg">
+          <img src="asap-logo.svg" alt="ASAP Logo on Dark">
+          <div class="logo-cell-label">Dark Background</div>
+        </div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span>For ASAP LLC</span>
+      <span>2026</span>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       PAGE 3 — COLOR PALETTE
+  ════════════════════════════════════════════ -->
+  <div class="page">
+    <div class="page-header">
+      <span>Brand Style Guide</span>
+      <span>Page / 03</span>
+    </div>
+    <div class="sidebar-label"><span>Color Palette</span></div>
+    <div class="page-content">
+      <div class="color-row">
+
+        <div class="color-card">
+          <div class="color-swatch" style="background:#0f2b4a;"></div>
+          <div class="color-info">
+            <div class="color-type">Primary Color</div>
+            <div class="color-name">Navy</div>
+            <div class="color-use">Backgrounds, headers, CTAs</div>
+            <div class="color-values">
+              <div class="color-val"><span>HEX</span>#0F2B4A</div>
+              <div class="color-val"><span>RGB</span>15 / 43 / 74</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-swatch" style="background:#1e5a8a;"></div>
+          <div class="color-info">
+            <div class="color-type">Primary Color</div>
+            <div class="color-name">Deep Teal</div>
+            <div class="color-use">Backgrounds, headers, CTAs</div>
+            <div class="color-values">
+              <div class="color-val"><span>HEX</span>#1E5A8A</div>
+              <div class="color-val"><span>RGB</span>30 / 90 / 138</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-swatch" style="background:#3db5a6;"></div>
+          <div class="color-info">
+            <div class="color-type">Accent Color</div>
+            <div class="color-name">Teal</div>
+            <div class="color-use">CTAs, icons, highlights</div>
+            <div class="color-values">
+              <div class="color-val"><span>HEX</span>#3DB5A6</div>
+              <div class="color-val"><span>RGB</span>61 / 181 / 166</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-swatch" style="background:#5fd4c4;"></div>
+          <div class="color-info">
+            <div class="color-type">Accent Light</div>
+            <div class="color-name">Light Teal</div>
+            <div class="color-use">Highlights, accents</div>
+            <div class="color-values">
+              <div class="color-val"><span>HEX</span>#5FD4C4</div>
+              <div class="color-val"><span>RGB</span>95 / 212 / 196</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-swatch" style="background:#ffffff; border-bottom:1px solid #e0e0e0;"></div>
+          <div class="color-info">
+            <div class="color-type">Accent Neutral</div>
+            <div class="color-name">White</div>
+            <div class="color-use">Text on dark, backgrounds</div>
+            <div class="color-values">
+              <div class="color-val"><span>HEX</span>#FFFFFF</div>
+              <div class="color-val"><span>RGB</span>255 / 255 / 255</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="page-footer">
+      <span>For ASAP LLC</span>
+      <span>2026</span>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       PAGE 4 — TYPEFACES
+  ════════════════════════════════════════════ -->
+  <div class="page">
+    <div class="page-header">
+      <span>Brand Style Guide</span>
+      <span>Page / 04</span>
+    </div>
+    <div class="sidebar-label"><span>Typefaces</span></div>
+    <div class="page-content">
+      <div class="type-list">
+
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-label">Title</div>
+            <div class="type-spec">
+              Space Grotesk, Bold<br>
+              All caps, letter-spacing +0.12em
+            </div>
+          </div>
+          <div class="type-sample">
+            <div class="type-sample-title">Applied Spatial Analytics</div>
+          </div>
+        </div>
+
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-label">Subheader</div>
+            <div class="type-spec">
+              Space Grotesk, Semibold<br>
+              All caps, letter-spacing +0.08em
+            </div>
+          </div>
+          <div class="type-sample">
+            <div class="type-sample-subheader">Transforming Spatial Data Into Decisions</div>
+          </div>
+        </div>
+
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-label">Heading</div>
+            <div class="type-spec">
+              Space Grotesk, Medium<br>
+              Sentence case
+            </div>
+          </div>
+          <div class="type-sample">
+            <div class="type-sample-heading">Smarter zoning review starts here</div>
+          </div>
+        </div>
+
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-label">Body Text</div>
+            <div class="type-spec">
+              Inter, Regular<br>
+              Sentence case
+            </div>
+          </div>
+          <div class="type-sample">
+            <div class="type-sample-body">ASAP delivers AI-powered tools that help municipalities review permits faster, with greater consistency and confidence. Our platform turns complex spatial data into clear, actionable insights.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="page-footer">
+      <span>For ASAP LLC</span>
+      <span>2026</span>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       PAGE 5 — BRAND VOICE
+  ════════════════════════════════════════════ -->
+  <div class="page">
+    <div class="page-header">
+      <span>Brand Style Guide</span>
+      <span>Page / 05</span>
+    </div>
+    <div class="sidebar-label"><span>Brand Voice</span></div>
+    <div class="page-content">
+      <div class="voice-content">
+
+        <div class="voice-section">
+          <div class="voice-label">Tone</div>
+          <div class="tone-pills">
+            <div class="tone-pill">Confident</div>
+            <div class="tone-pill">Clear</div>
+            <div class="tone-pill">Modern</div>
+            <div class="tone-pill">Approachable</div>
+          </div>
+        </div>
+
+        <div class="voice-section">
+          <div class="voice-label">Language</div>
+          <div class="voice-columns">
+            <div class="voice-col">
+              <div class="voice-col-title positive">We say</div>
+              <div class="voice-words">
+                <div class="voice-word">Fast</div>
+                <div class="voice-word">Smart</div>
+                <div class="voice-word">Consistent</div>
+              </div>
+            </div>
+            <div class="voice-col">
+              <div class="voice-col-title negative">We don't say</div>
+              <div class="voice-words">
+                <div class="voice-word">Cheap</div>
+                <div class="voice-word">Easy</div>
+                <div class="voice-word">Simple</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="voice-section">
+          <div class="voice-label">Tagline</div>
+          <div class="tagline-display">
+            <div class="tagline-text">"The New Pace of Progress"</div>
+            <div class="tagline-note">Primary brand tagline &mdash; use across all marketing materials</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="page-footer">
+      <span>For ASAP LLC</span>
+      <span>2026</span>
+    </div>
+  </div>
+
+</body>
+</html>

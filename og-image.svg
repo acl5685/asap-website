@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f2b4a"/>
+      <stop offset="50%" stop-color="#1e5a8a"/>
+      <stop offset="100%" stop-color="#3db5a6"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <text x="600" y="250" text-anchor="middle" font-family="Arial,sans-serif" font-size="72" font-weight="bold" fill="white">ASAP</text>
+  <text x="600" y="310" text-anchor="middle" font-family="Arial,sans-serif" font-size="24" fill="#5fd4c4">Applied Spatial Analytics Platform</text>
+  <line x1="450" y1="340" x2="750" y2="340" stroke="#3db5a6" stroke-width="2"/>
+  <text x="600" y="400" text-anchor="middle" font-family="Arial,sans-serif" font-size="36" fill="white">Zone Genie</text>
+  <text x="600" y="445" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" fill="rgba(255,255,255,0.7)">AI-Powered Zoning &amp; Permit Review</text>
+  <text x="600" y="560" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-style="italic" fill="#5fd4c4">The New Pace of Progress</text>
+</svg>

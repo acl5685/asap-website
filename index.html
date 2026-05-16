@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASAP | Zone Genie — Zoning Review in 70 Seconds</title>
+  <meta name="description" content="Zone Genie by ASAP automates zoning and permit review for municipal planning departments. AI-powered compliance checks in minutes, not weeks.">
+  <link rel="canonical" href="https://asapgenie.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://asapgenie.com/">
+  <meta property="og:title" content="ASAP | Zone Genie — Zoning Review in 70 Seconds">
+  <meta property="og:description" content="Zone Genie automates zoning and permit review so municipalities can process applications in minutes, not weeks.">
+  <meta property="og:image" content="https://asapgenie.com/og-image.png">
+  <meta property="og:site_name" content="ASAP — Applied Spatial Analytics Platform">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ASAP | Zone Genie — Zoning Review in 70 Seconds">
+  <meta name="twitter:description" content="AI-powered zoning and permit review for municipalities.">
+  <meta name="twitter:image" content="https://asapgenie.com/og-image.png">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── Reset ─────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    /* ─── Tokens ─────────────────────────────────────────────────── */
+    :root {
+      --bg-base:     #080f1a;
+      --bg-surface:  #0a1628;
+      --bg-elevated: #0f2b4a;
+      --bg-card:     #0d1f38;
+
+      --text-primary:   #e8f0f4;
+      --text-secondary: rgba(232,240,244,0.58);
+      --text-tertiary:  rgba(232,240,244,0.32);
+
+      --accent:       #3db5a6;
+      --accent-dim:   #2a8a7e;
+      --accent-glow:  rgba(61,181,166,0.10);
+      --accent-border: rgba(61,181,166,0.20);
+
+      /* Product brand colors */
+      --color-zg:        #3db5a6;
+      --color-zg-border: rgba(61,181,166,0.28);
+      --color-zg-bg:     rgba(61,181,166,0.06);
+      --color-sg:        #5ec42a;
+      --color-sg-border: rgba(94,196,42,0.28);
+      --color-sg-bg:     rgba(94,196,42,0.06);
+      --color-fg:        #d4831c;
+      --color-fg-border: rgba(212,131,28,0.28);
+      --color-fg-bg:     rgba(212,131,28,0.06);
+
+      --border:       rgba(255,255,255,0.07);
+      --border-light: rgba(255,255,255,0.11);
+
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body:    'Inter', sans-serif;
+
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+      --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
+      --section-pad: clamp(80px, 10vw, 140px);
+      --container:   1160px;
+      --gutter:      clamp(20px, 5vw, 48px);
+    }
+
+    /* ─── Base ───────────────────────────────────────────────────── */
+    body {
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    ::selection { background: var(--accent); color: #080f1a; }
+
+    a { color: inherit; text-decoration: none; }
+
+    img { display: block; max-width: 100%; }
+
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    /* ─── Nav ────────────────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 12px 0;
+      transition: background-color 280ms var(--ease-out),
+                  box-shadow 280ms var(--ease-out),
+                  padding 280ms var(--ease-out);
+    }
+
+    .nav.scrolled {
+      background: rgba(8,15,26,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 var(--border);
+      padding: 8px 0;
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 36px;
+    }
+
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .nav__logo img {
+      height: 200px;
+      width: auto;
+      display: block;
+      transition: height 320ms var(--ease-out);
+    }
+
+    .nav.scrolled .nav__logo img {
+      height: 72px;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav__links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: rgba(232,240,244,0.70);
+      transition: color 200ms var(--ease-out);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .nav__links a:hover { color: var(--text-primary); }
+    }
+
+    .nav__cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .nav__hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: var(--text-primary);
+    }
+
+    /* ─── Buttons ────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform 160ms var(--ease-out),
+                  box-shadow 160ms var(--ease-out),
+                  background-color 160ms var(--ease-out);
+    }
+
+    .btn:active { transform: scale(0.97); }
+
+    .btn--ghost {
+      padding: 10px 20px;
+      background: rgba(255,255,255,0.06);
+      color: var(--text-primary);
+      border: 1px solid var(--border-light);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .btn--ghost:hover {
+        background: rgba(255,255,255,0.10);
+        border-color: rgba(255,255,255,0.18);
+      }
+    }
+
+    .btn--primary {
+      padding: 14px 28px;
+      background: var(--accent);
+      color: #080f1a;
+      font-size: 0.95rem;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .btn--primary:hover {
+        background: #4ec9b9;
+        box-shadow: 0 8px 32px rgba(61,181,166,0.28);
+        transform: translateY(-1px);
+      }
+    }
+
+    .btn--primary:active { transform: scale(0.97); }
+
+    .btn--outline {
+      padding: 14px 28px;
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border-light);
+      font-size: 0.95rem;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .btn--outline:hover {
+        border-color: var(--accent-border);
+        color: var(--accent);
+        transform: translateY(-1px);
+      }
+    }
+
+    .btn--outline:active { transform: scale(0.97); }
+
+    /* ─── Mobile Menu ────────────────────────────────────────────── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 99;
+      background: var(--bg-base);
+      padding: 100px var(--gutter) 40px;
+      flex-direction: column;
+      gap: 8px;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity 200ms var(--ease-out),
+                  transform 200ms var(--ease-out);
+    }
+
+    .mobile-menu.open {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mobile-menu a {
+      font-size: 1.4rem;
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--text-secondary);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      transition: color 150ms var(--ease-out);
+    }
+
+    .mobile-menu a:hover { color: var(--text-primary); }
+
+    .mobile-menu .btn--primary { margin-top: 24px; width: fit-content; }
+
+    /* ─── Fade-up animation (scroll-triggered, below fold) ─────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 400ms var(--ease-out),
+                  transform 400ms var(--ease-out);
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Hero entrance (fires on load, no observer needed) ─────── */
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-enter {
+        animation: heroFadeUp 500ms var(--ease-out) both;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-enter { opacity: 1; transform: none; }
+    }
+
+    /* ─── Section label ──────────────────────────────────────────── */
+    .eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════════════════════ */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding: 260px 0 100px;
+      overflow: hidden;
+    }
+
+    /* Ambient grid texture */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(61,181,166,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(61,181,166,0.03) 1px, transparent 1px);
+      background-size: 64px 64px;
+      pointer-events: none;
+    }
+
+    /* Ambient radial glow */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(ellipse at center, rgba(61,181,166,0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero__globe {
+      position: absolute;
+      right: -60px;
+      bottom: -40px;
+      width: clamp(380px, 50vw, 680px);
+      height: auto;
+      opacity: 0.055;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hero__content {
+      position: relative;
+      max-width: 780px;
+    }
+
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 50px;
+      border: 1px solid var(--accent-border);
+      background: var(--accent-glow);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      margin-bottom: 32px;
+    }
+
+    .hero__badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse-dot 2.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.75); }
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3.0rem, 7.2vw, 6.2rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      color: var(--text-primary);
+      margin-bottom: 28px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero__sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--text-secondary);
+      line-height: 1.65;
+      max-width: 560px;
+      margin-bottom: 48px;
+    }
+
+    .hero__actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero__trust {
+      margin-top: 64px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+    }
+
+    .hero__trust-line {
+      width: 24px;
+      height: 1px;
+      background: var(--border-light);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       STATS
+    ═══════════════════════════════════════════════════════════════ */
+    .stats {
+      padding: 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-surface);
+    }
+
+    .stats__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .stats__item {
+      padding: clamp(40px, 6vw, 72px) clamp(24px, 4vw, 56px);
+      border-right: 1px solid var(--border);
+    }
+
+    .stats__item:last-child { border-right: none; }
+
+    .stats__number {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 10px;
+    }
+
+    .stats__number span {
+      color: var(--accent);
+    }
+
+    .stats__label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      max-width: 180px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       PILLARS
+    ═══════════════════════════════════════════════════════════════ */
+    .pillars {
+      padding: var(--section-pad) 0;
+    }
+
+    .pillars__header {
+      margin-bottom: clamp(48px, 7vw, 80px);
+    }
+
+    .pillars__header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      max-width: 560px;
+    }
+
+    .pillars__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .pillar {
+      background: var(--bg-card);
+      padding: clamp(32px, 4vw, 48px) clamp(24px, 3vw, 40px);
+      transition: background-color 200ms var(--ease-out);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .pillar:hover { background: #10253e; }
+    }
+
+    .pillar__num {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.10em;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    .pillar__icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--accent-glow);
+      border: 1px solid var(--accent-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .pillar__icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .pillar h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .pillar p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       VALIDATION
+    ═══════════════════════════════════════════════════════════════ */
+    .validation {
+      padding: var(--section-pad) 0 clamp(48px, 6vw, 80px);
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .validation__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(48px, 7vw, 96px);
+      align-items: start;
+    }
+
+    .validation__prose h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .validation__prose p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 16px;
+      max-width: 480px;
+    }
+
+    .validation__cite {
+      margin-top: 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      border-radius: 10px;
+      background: var(--accent-glow);
+      border: 1px solid var(--accent-border);
+    }
+
+    .validation__cite-bar {
+      width: 3px;
+      height: 40px;
+      background: var(--accent);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .validation__cite p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin: 0;
+      max-width: none;
+    }
+
+    .validation__cite strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* Time math table */
+    .time-math {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .time-math__header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+
+    .time-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .time-table th {
+      padding: 12px 24px;
+      text-align: left;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,0,0,0.15);
+    }
+
+    .time-table th:last-child { text-align: right; }
+
+    .time-table td {
+      padding: 14px 24px;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .time-table tr:last-child td { border-bottom: none; }
+
+    .time-table td:last-child {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      font-weight: 500;
+    }
+
+    .time-table .auto {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .time-table .manual {
+      color: var(--text-tertiary);
+    }
+
+    .time-table .total-row td {
+      font-weight: 600;
+      color: var(--text-primary);
+      background: rgba(61,181,166,0.05);
+      border-top: 1px solid var(--accent-border);
+    }
+
+    .time-table .total-row td:last-child {
+      color: var(--accent);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SUITE
+    ═══════════════════════════════════════════════════════════════ */
+    .suite {
+      padding: clamp(48px, 6vw, 80px) 0 var(--section-pad);
+    }
+
+    .suite__header {
+      text-align: center;
+      margin-bottom: clamp(48px, 7vw, 72px);
+    }
+
+    .suite__header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .suite__header p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    .suite__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .suite-card {
+      display: block;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: clamp(28px, 3.5vw, 40px);
+      background: var(--bg-card);
+      color: inherit;
+      text-decoration: none;
+      transition: border-color 200ms var(--ease-out),
+                  transform 200ms var(--ease-out);
+    }
+
+    .suite-card--active {
+      border-color: var(--color-zg-border);
+      background: linear-gradient(160deg, #081e22 0%, #071520 100%);
+    }
+
+    .suite-card--pipeline {
+      opacity: 0.55;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .suite-card--zg:hover {
+        border-color: var(--color-zg-border);
+        transform: translateY(-3px);
+      }
+
+      .suite-card--sg:hover {
+        border-color: var(--color-sg-border);
+        transform: translateY(-3px);
+      }
+
+      .suite-card--fg:hover {
+        border-color: var(--color-fg-border);
+        transform: translateY(-3px);
+      }
+
+      .suite-card--pipeline:hover {
+        opacity: 0.75;
+      }
+    }
+
+    .suite-card:active { transform: scale(0.98); }
+
+    .suite-card__mark {
+      width: 64px;
+      height: 64px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .suite-card__mark img {
+      width: 76%;
+      height: 76%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .suite-card__mark--zg {
+      background: linear-gradient(135deg, #061e20, #0d4840);
+      color: var(--color-zg);
+      border: 1px solid rgba(61,181,166,0.20);
+    }
+
+    .suite-card__mark--sg {
+      background: linear-gradient(135deg, #0c1e06, #1c4208);
+      color: var(--color-sg);
+      border: 1px solid rgba(94,196,42,0.20);
+    }
+
+    .suite-card__mark--fg {
+      background: linear-gradient(135deg, #1e0e00, #4a2600);
+      color: var(--color-fg);
+      border: 1px solid rgba(212,131,28,0.20);
+    }
+
+    .suite-card__status {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+
+    .suite-card__status--live {
+      background: rgba(61,181,166,0.12);
+      color: var(--accent);
+      border: 1px solid var(--accent-border);
+    }
+
+    .suite-card__status--pipeline {
+      background: rgba(255,255,255,0.05);
+      color: var(--text-tertiary);
+      border: 1px solid var(--border);
+    }
+
+    .suite-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+
+    .suite-card p {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       CTA / FORM
+    ═══════════════════════════════════════════════════════════════ */
+    .cta-section {
+      padding: var(--section-pad) 0;
+      border-top: 1px solid var(--border);
+      background: var(--bg-surface);
+    }
+
+    .cta-section__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(48px, 7vw, 96px);
+      align-items: center;
+    }
+
+    .cta-section__left h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .cta-section__left > p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      max-width: 460px;
+    }
+
+
+    /* Form */
+    .demo-form {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: clamp(28px, 4vw, 44px);
+    }
+
+    .demo-form h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .demo-form__sub {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .form-group.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--text-secondary);
+    }
+
+    input, select, textarea {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 11px 14px;
+      outline: none;
+      width: 100%;
+      transition: border-color 150ms var(--ease-out),
+                  background-color 150ms var(--ease-out);
+      -webkit-appearance: none;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: var(--text-tertiary);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      background: rgba(61,181,166,0.04);
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='rgba(232,240,244,0.4)' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    select option {
+      background: #0d1f38;
+      color: var(--text-primary);
+    }
+
+    textarea { resize: vertical; min-height: 90px; }
+
+    .form-submit {
+      margin-top: 4px;
+    }
+
+    .form-submit .btn--primary {
+      width: 100%;
+      padding: 15px;
+      font-size: 1rem;
+    }
+
+    .form-note {
+      margin-top: 12px;
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+      text-align: center;
+    }
+
+    .form-status {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+    }
+
+    .form-status.success {
+      display: block;
+      background: rgba(61,181,166,0.08);
+      border: 1px solid var(--accent-border);
+      color: var(--accent);
+    }
+
+    .form-status.error {
+      display: block;
+      background: rgba(220,60,60,0.08);
+      border: 1px solid rgba(220,60,60,0.2);
+      color: #f87171;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════════════════ */
+    .footer {
+      padding: 28px 0 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .footer__brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer__brand img {
+      height: 28px;
+      width: auto;
+    }
+
+    .footer__links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .footer__links a {
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      transition: color 150ms var(--ease-out);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .footer__links a:hover { color: var(--text-secondary); }
+    }
+
+    .footer__bottom {
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer__copy {
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+    }
+
+    .footer__tagline {
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      font-family: var(--font-display);
+      font-weight: 500;
+    }
+
+    /* ─── Reduced motion ─────────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .hero__badge-dot { animation: none; }
+
+      .btn, .suite-card, .pillar, .nav, input, select, textarea {
+        transition: none;
+      }
+    }
+
+    /* ─── Responsive ─────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .nav__links { display: none; }
+      .nav__cta .btn--ghost { display: none; }
+      .nav__hamburger { display: flex; }
+
+      .stats__grid { grid-template-columns: 1fr; }
+      .stats__item {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 36px var(--gutter);
+      }
+      .stats__item:last-child { border-bottom: none; }
+
+      .pillars__grid { grid-template-columns: 1fr; gap: 1px; }
+
+      .validation__inner { grid-template-columns: 1fr; gap: 40px; }
+
+      .suite__grid { grid-template-columns: 1fr; }
+
+      .cta-section__inner { grid-template-columns: 1fr; }
+
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: clamp(2.4rem, 11vw, 3.4rem); }
+      .hero__actions { flex-direction: column; align-items: flex-start; }
+      .hero__actions .btn { width: 100%; justify-content: center; }
+
+      .footer__inner { flex-direction: column; gap: 24px; }
+      .footer__links { flex-direction: column; gap: 12px; }
+      .footer__bottom { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ NAV ═══════════════════════════════════════════════════════ -->
+  <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <div class="nav__inner">
+        <a class="nav__logo" href="/" aria-label="ASAP — Applied Spatial Analytics Platform (home)">
+          <img src="asap-logo-official-white-wordmark.png" alt="ASAP">
+        </a>
+
+        <ul class="nav__links">
+          <li><a href="#pillars">How It Works</a></li>
+          <li><a href="#validation">Validation</a></li>
+          <li><a href="#suite">Products</a></li>
+        </ul>
+
+        <div class="nav__cta">
+          <a class="btn btn--primary" href="#demo">Request Demo</a>
+        </div>
+
+        <button class="nav__hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+            <line x1="3" y1="7" x2="19" y2="7"/>
+            <line x1="3" y1="15" x2="19" y2="15"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <a href="#pillars" class="mobile-menu__link">How It Works</a>
+    <a href="#validation" class="mobile-menu__link">Validation</a>
+    <a href="#suite" class="mobile-menu__link">Products</a>
+    <a class="btn btn--primary" href="#demo">Request Demo</a>
+  </div>
+
+  <main>
+
+    <!-- ═══ HERO ════════════════════════════════════════════════════ -->
+    <section class="hero" aria-label="Hero">
+      <img class="hero__globe" src="asap-globe.svg" alt="" aria-hidden="true">
+
+      <div class="container">
+        <div class="hero__content">
+          <div class="hero__badge hero-enter" style="animation-delay: 0ms;">
+            <span class="hero__badge-dot" aria-hidden="true"></span>
+            Zone Genie — Live in Production
+          </div>
+
+          <h1 class="hero-enter" style="animation-delay: 80ms;">
+            Zoning Review<br>in <em>70 Seconds.</em>
+          </h1>
+
+          <p class="hero__sub hero-enter" style="animation-delay: 160ms;">
+            Zone Genie automates zoning and permit compliance review for municipal planning departments — cutting weeks of manual staff time to minutes per application.
+          </p>
+
+          <div class="hero__actions hero-enter" style="animation-delay: 240ms;">
+            <a class="btn btn--primary" href="#demo">Request a Demo</a>
+            <a class="btn btn--outline" href="#validation">See Real Results</a>
+          </div>
+
+          <div class="hero__trust hero-enter" style="animation-delay: 320ms;">
+            <span class="hero__trust-line" aria-hidden="true"></span>
+            Built for cities of any size
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PILLARS ══════════════════════════════════════════════════ -->
+    <section class="pillars" id="pillars" aria-label="How it works">
+      <div class="container">
+        <div class="pillars__header fade-up">
+          <p class="eyebrow">How It Works</p>
+          <h2>Everything a planner checks, done automatically.</h2>
+        </div>
+
+        <div class="pillars__grid fade-up" style="transition-delay:60ms;">
+
+          <div class="pillar">
+            <div class="pillar__num">01</div>
+            <div class="pillar__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <rect x="3" y="3" width="7" height="7" rx="1"/>
+                <rect x="14" y="3" width="7" height="7" rx="1"/>
+                <rect x="3" y="14" width="7" height="7" rx="1"/>
+                <circle cx="17.5" cy="17.5" r="3.5"/>
+              </svg>
+            </div>
+            <h3>Built for the Queue</h3>
+            <p>Zone Genie fits the workflow your department already has. Applicants submit. Genie runs the review. Staff review the structured output.</p>
+          </div>
+
+          <div class="pillar">
+            <div class="pillar__num">02</div>
+            <div class="pillar__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M9 12l2 2 4-4"/>
+                <path d="M12 3a9 9 0 100 18A9 9 0 0012 3z"/>
+              </svg>
+            </div>
+            <h3>Validated, Not Vibes</h3>
+            <p>Every finding is traceable to a specific code section. Genie cites its source. Staff can verify in seconds — and residents get answers.</p>
+          </div>
+
+          <div class="pillar">
+            <div class="pillar__num">03</div>
+            <div class="pillar__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 3l8 3.5v5c0 4.5-3.4 8.7-8 10-4.6-1.3-8-5.5-8-10v-5L12 3z"/>
+              </svg>
+            </div>
+            <h3>Trustworthy by Design</h3>
+            <p>Genie flags what it cannot determine. When something requires human judgment — variance requests, edge cases — it says so clearly.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ VALIDATION ════════════════════════════════════════════════ -->
+    <section class="validation" id="validation" aria-label="Real results">
+      <div class="container">
+        <div class="validation__inner">
+
+          <div class="validation__prose fade-up">
+            <p class="eyebrow">The Time Math</p>
+            <h2>What happens to the hours your staff used to spend.</h2>
+            <p>
+              A standard zoning review — pulling the parcel, reading the district code, checking setbacks, flagging use compliance — takes a skilled planner 1 to 1.5 hours per application. Zone Genie does the same work in under 70 seconds.
+            </p>
+            <p>
+              That time doesn't disappear. It moves to the work that still requires a human: site visits, community input, complex projects. The queue moves. Staff morale improves.
+            </p>
+          </div>
+
+          <div class="fade-up" style="transition-delay:80ms;">
+            <div class="time-math">
+              <div class="time-math__header">Review Step Breakdown</div>
+              <table class="time-table" aria-label="Time comparison per review step">
+                <thead>
+                  <tr>
+                    <th scope="col">Step</th>
+                    <th scope="col">Manual</th>
+                    <th scope="col" style="color: var(--accent);">Genie</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Parcel &amp; zoning lookup</td>
+                    <td class="manual">~5 min</td>
+                    <td class="auto">&lt;5 sec</td>
+                  </tr>
+                  <tr>
+                    <td>District code retrieval</td>
+                    <td class="manual">~15 min</td>
+                    <td class="auto">Automatic</td>
+                  </tr>
+                  <tr>
+                    <td>Setback &amp; dimensional check</td>
+                    <td class="manual">~5 min</td>
+                    <td class="auto">Automatic</td>
+                  </tr>
+                  <tr>
+                    <td>Use compliance review</td>
+                    <td class="manual">15–40 min</td>
+                    <td class="auto">Automatic</td>
+                  </tr>
+                  <tr>
+                    <td>Findings writeup</td>
+                    <td class="manual">~25 min</td>
+                    <td class="auto">Automatic</td>
+                  </tr>
+                  <tr class="total-row">
+                    <td><strong>Total per application</strong></td>
+                    <td><strong>1–1.5 hours</strong></td>
+                    <td><strong>&lt;70 seconds</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SUITE ════════════════════════════════════════════════════ -->
+    <section class="suite" id="suite" aria-label="Product suite">
+      <div class="container">
+        <div class="suite__header fade-up">
+          <p class="eyebrow">The ASAP Platform</p>
+          <h2>One platform. Every permit touchpoint.</h2>
+          <p>Zone Genie is the first product. The platform keeps building.</p>
+        </div>
+
+        <div class="suite__grid">
+          <div class="suite-card suite-card--active suite-card--zg fade-up">
+            <div class="suite-card__mark suite-card__mark--zg" aria-label="Zone Genie logo mark"><img src="zone-genie-lamp.png" alt=""></div>
+            <div class="suite-card__status suite-card__status--live">Live</div>
+            <h3>Zone Genie</h3>
+            <p>AI-powered zoning and permit compliance review for municipal planning departments. Reduces review time from weeks to minutes.</p>
+          </div>
+
+          <div class="suite-card suite-card--pipeline suite-card--sg fade-up" style="transition-delay:80ms;">
+            <div class="suite-card__mark suite-card__mark--sg" aria-label="Site Genie logo mark"><img src="site-genie-lamp.png" alt=""></div>
+            <div class="suite-card__status suite-card__status--pipeline">Coming Soon</div>
+            <h3>Site Genie</h3>
+            <p>AI-powered site selection and development feasibility analysis for real estate developers. Know what's buildable before you bid.</p>
+          </div>
+
+          <div class="suite-card suite-card--pipeline suite-card--fg fade-up" style="transition-delay:160ms;">
+            <div class="suite-card__mark suite-card__mark--fg" aria-label="Fence Genie logo mark"><img src="fence-genie-lamp.png" alt=""></div>
+            <div class="suite-card__status suite-card__status--pipeline">Coming Soon</div>
+            <h3>Fence Genie</h3>
+            <p>Homeowner-facing fence permit and site plan generator. Instant setback guidance and permit-ready documents for any parcel.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CTA / FORM ════════════════════════════════════════════════ -->
+    <section class="cta-section" id="demo" aria-label="Request a demo">
+      <div class="container">
+        <div class="cta-section__inner">
+
+          <div class="cta-section__left fade-up">
+            <p class="eyebrow">Request a Demo</p>
+            <h2>See it on your city's data.</h2>
+            <p>
+              We'll walk through a live review using your zoning code and real permit applications from your queue — so you can see exactly what your staff gets back.
+            </p>
+
+          </div>
+
+          <div class="fade-up" style="transition-delay:80ms;">
+            <div class="demo-form">
+              <h3>Book a 30-minute walkthrough</h3>
+              <p class="demo-form__sub">No pitch deck. Just the product, on your jurisdiction's data.</p>
+
+              <!--
+                  Demo request submissions are routed to: andie@asapgenie.com
+                  Backend: Formspree. To change recipient, log in at formspree.io,
+                  open this form's settings, and update the email address.
+                  The _to field below only works on Formspree paid plans.
+              -->
+              <form id="demo-form" action="https://formspree.io/f/mvzvqpww" method="POST" novalidate>
+                <input type="hidden" name="_subject" value="ASAP — Zone Genie Demo Request">
+                <input type="hidden" name="_to" value="andie@asapgenie.com">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="first-name">First name</label>
+                    <input type="text" id="first-name" name="firstName" placeholder="Maria" required autocomplete="given-name">
+                  </div>
+                  <div class="form-group">
+                    <label for="last-name">Last name</label>
+                    <input type="text" id="last-name" name="lastName" placeholder="Chen" required autocomplete="family-name">
+                  </div>
+                </div>
+
+                <div class="form-group full">
+                  <label for="email">Work email</label>
+                  <input type="email" id="email" name="email" placeholder="mchen@cityofyourcity.gov" required autocomplete="email">
+                </div>
+
+                <div class="form-group full">
+                  <label for="title">Your role</label>
+                  <select id="title" name="title" required>
+                    <option value="" disabled selected>Select your role</option>
+                    <option>Zoning Administrator</option>
+                    <option>Planning Director</option>
+                    <option>Building Official</option>
+                    <option>City Manager / Administrator</option>
+                    <option>GIS / Data Staff</option>
+                    <option>IT Director</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+
+                <div class="form-group full">
+                  <label for="city">City / Municipality</label>
+                  <input type="text" id="city" name="city" placeholder="City of Springfield, OH" required autocomplete="organization">
+                </div>
+
+                <div class="form-group full">
+                  <label for="population">Approximate population</label>
+                  <select id="population" name="population">
+                    <option value="" disabled selected>Select range</option>
+                    <option>Under 25,000</option>
+                    <option>25,000 – 75,000</option>
+                    <option>75,000 – 150,000</option>
+                    <option>150,000 – 300,000</option>
+                    <option>Over 300,000</option>
+                  </select>
+                </div>
+
+                <div class="form-group full">
+                  <label for="message">Anything specific you want to see? (optional)</label>
+                  <textarea id="message" name="message" placeholder="e.g. We handle ~200 fence permit applications per month and our backlog is growing..."></textarea>
+                </div>
+
+                <div class="form-submit">
+                  <button type="submit" class="btn btn--primary">Request Demo →</button>
+                </div>
+              </form>
+
+              <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══ FOOTER ═══════════════════════════════════════════════════ -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="container">
+      <div class="footer__inner">
+        <a class="footer__brand" href="/" aria-label="ASAP home">
+          <img src="asap-logo-official-white-wordmark.png" alt="ASAP" style="height:72px;width:auto;">
+        </a>
+
+        <ul class="footer__links">
+          <li><a href="#pillars">How It Works</a></li>
+          <li><a href="#suite">Products</a></li>
+          <li><a href="#demo">Demo</a></li>
+          <li><a href="mailto:hello@asapgenie.com">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2025 ASAP LLC. All rights reserved.</p>
+        <p class="footer__tagline">Applied Spatial Analytics Platform</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══ SCRIPTS ══════════════════════════════════════════════════ -->
+  <script>
+    // Nav scroll state
+    const nav = document.getElementById('nav');
+    const onScroll = () => {
+      nav.classList.toggle('scrolled', window.scrollY > 24);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let menuOpen = false;
+
+    hamburger.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      hamburger.setAttribute('aria-expanded', menuOpen);
+      if (menuOpen) {
+        mobileMenu.style.display = 'flex';
+        // Force reflow then animate in
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            mobileMenu.classList.add('open');
+          });
+        });
+        document.body.style.overflow = 'hidden';
+      } else {
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+          mobileMenu.style.display = 'none';
+        }, 220);
+      }
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuOpen = false;
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(() => { mobileMenu.style.display = 'none'; }, 220);
+      });
+    });
+
+    // Fade-up IntersectionObserver
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReduced) {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.08 });
+
+      document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+    } else {
+      document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+    }
+
+    // Demo form — async Formspree submit
+    const demoForm = document.getElementById('demo-form');
+    const formStatus = document.getElementById('form-status');
+    const submitBtn = demoForm ? demoForm.querySelector('[type="submit"]') : null;
+
+    if (demoForm) {
+      demoForm.addEventListener('submit', async e => {
+        e.preventDefault();
+
+        const data = new FormData(demoForm);
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+
+        try {
+          const res = await fetch(demoForm.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (res.ok) {
+            demoForm.style.display = 'none';
+            formStatus.className = 'form-status success';
+            formStatus.textContent = "✓ Request received. We'll be in touch within one business day.";
+          } else {
+            throw new Error('Server error');
+          }
+        } catch {
+          formStatus.className = 'form-status error';
+          formStatus.textContent = 'Something went wrong. Please email us directly at hello@asapgenie.com';
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Request Demo →';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# Firebase
+.firebase/
+
+# Claude / local tooling
+.claude/
+.impeccable/
+impeccable-style-universal/
+taste-skill-main/
+design-motion-principles/
+
+# Temp / scratch files
+D:VIBE APPSimpeccable-results.json
+
+# Large reference screenshots (not site assets)
+Fence Genie.png
+Site Genie.png
+Zone Genie.png
