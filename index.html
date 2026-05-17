@@ -1592,8 +1592,7 @@
       </button>
       <h2 class="contact-modal__title" id="contact-modal-title">Get in touch</h2>
       <p class="contact-modal__sub">Questions, partnerships, or just want to learn more — we read every message.</p>
-      <form id="contact-form" action="https://formspree.io/f/mvzvqpww" method="POST" novalidate>
-        <input type="hidden" name="_subject" value="ASAP — Contact Form">
+      <form id="contact-form" action="https://us-central1-zone-genie.cloudfunctions.net/contactEmail" method="POST" novalidate>
         <div class="form-row">
           <div class="form-group">
             <label for="contact-first">First name</label>
@@ -1758,10 +1757,12 @@
         contactSubmit.textContent = 'Sending…';
 
         try {
+          const fd = new FormData(contactForm);
+          const body = Object.fromEntries(fd.entries());
           const res = await fetch(contactForm.action, {
             method: 'POST',
-            body: new FormData(contactForm),
-            headers: { 'Accept': 'application/json' }
+            body: JSON.stringify(body),
+            headers: { 'Content-Type': 'application/json' }
           });
 
           if (res.ok) {
