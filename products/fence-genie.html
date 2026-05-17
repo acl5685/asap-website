@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fence Genie — From Fence Plan to Approved Permit | ASAP</title>
+<meta name="description" content="Fence Genie guides property owners and contractors through compliant fence plans and automates the permit submission and municipal review process.">
+<link rel="icon" href="../favicon.svg">
+<link rel="stylesheet" href="_landing.css">
+<style>
+  /* Fence Genie theme — DESIGN.md §3C — dual-color orange + teal */
+  :root {
+    --p-primary:   #d4831c;
+    --p-dark:      #1a5a6b;
+    --p-mid:       #2a8a9a;
+    --p-accent:    #3bb8c8;
+    --p-bg:        #fdf6ef;
+    --p-text:      #2a1e14;
+  }
+
+  /* Hero tagline strip */
+  .hero__pace {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--p-primary);
+    font-size: 1rem;
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+  }
+
+  /* Promise card — dark-teal lead block */
+  .promise {
+    background: var(--p-dark);
+    color: #fff;
+    border-radius: 16px;
+    padding: clamp(32px, 4vw, 48px);
+    margin-top: 56px;
+  }
+  .promise h2 {
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .promise p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.84);
+    line-height: 1.65;
+    max-width: 68ch;
+  }
+
+  /* Problem / Solution two-column */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  @media (max-width: 760px) { .compare { grid-template-columns: 1fr; } }
+  .compare__col {
+    background: color-mix(in srgb, var(--p-primary) 5%, white);
+    border-left: 3px solid var(--p-primary);
+    border-radius: 12px;
+    padding: 26px 28px;
+  }
+  .compare__col h3 {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--p-primary);
+    margin-bottom: 14px;
+  }
+  .compare__col ul { list-style: none; padding: 0; }
+  .compare__col li {
+    font-size: 0.92rem;
+    color: var(--p-text);
+    line-height: 1.55;
+    padding: 7px 0;
+    padding-left: 14px;
+    position: relative;
+  }
+  .compare__col li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--p-primary);
+    font-weight: 700;
+  }
+
+  /* Feature pills (6 in 2 cols) */
+  .features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 760px) { .features { grid-template-columns: 1fr; } }
+  .feature-pill {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 20px;
+    background: color-mix(in srgb, var(--p-primary) 10%, white);
+    border-radius: 10px;
+    font-size: 0.92rem;
+    color: var(--p-text);
+    line-height: 1.5;
+  }
+  .feature-pill__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--p-primary);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  /* Three audiences */
+  .audiences {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 880px) { .audiences { grid-template-columns: 1fr; } }
+  .audience {
+    padding: 26px 28px;
+    background: color-mix(in srgb, var(--p-primary) 8%, white);
+    border-top: 3px solid var(--p-primary);
+    border-radius: 10px;
+  }
+  .audience h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+    color: var(--p-dark);
+    margin-bottom: 8px;
+  }
+  .audience p {
+    font-size: 0.9rem;
+    color: var(--p-text-dim);
+    line-height: 1.6;
+  }
+
+  /* Almost-live status pill */
+  .status-pill--almost {
+    background: color-mix(in srgb, #5ec42a 12%, white);
+    border-color: color-mix(in srgb, #5ec42a 26%, transparent);
+    color: #1a7a4a;
+  }
+  .status-pill--almost .status-pill__dot {
+    background: #5ec42a;
+  }
+</style>
+</head>
+<body>
+
+  <!-- ═══ NAV ═══════════════════════════════════════════════════════ -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <div class="nav__inner">
+        <a class="nav__logo" href="../index.html" aria-label="ASAP home">
+          <img src="../asap-logo-official-transparent.png" alt="ASAP">
+        </a>
+        <div class="nav__crumb">
+          <span class="nav__crumb-sep"></span>
+          <span class="nav__crumb-product">Fence Genie</span>
+        </div>
+        <ul class="nav__links">
+          <li><a href="#problem">The problem</a></li>
+          <li><a href="#features">Key features</a></li>
+          <li><a href="#audiences">Who it's for</a></li>
+          <li><a href="../index.html#suite">Other products</a></li>
+        </ul>
+        <div class="nav__cta">
+          <a class="btn btn--primary" href="#early-access">Get Early Access</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ═══ HERO ════════════════════════════════════════════════════ -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero__inner">
+          <div class="status-pill status-pill--almost">
+            <span class="status-pill__dot"></span>
+            Almost Live
+          </div>
+          <p class="hero__pace">The New Pace of Progress</p>
+          <h1>From Fence Plan to Approved Permit — <em>Without the Headache.</em></h1>
+          <p class="hero__sub">Fence Genie guides property owners and contractors through compliant fence plans and automates the permit submission and municipal review process — saving time for everyone in the chain.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#early-access">Get Early Access</a>
+            <a class="btn btn--outline" href="#features">See key features</a>
+          </div>
+
+          <div class="promise">
+            <h2>One tool. Three sides of the same problem, solved.</h2>
+            <p>Property owners get a compliant plan without the legal jargon. Fence companies stop burning billable hours on paperwork. City permit offices stop chasing missing fields. Everyone moves faster.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PROBLEM / WITH FENCE GENIE ═════════════════════════════ -->
+    <section class="section" id="problem">
+      <div class="container">
+        <div class="section__head fade-up">
+          <p class="eyebrow">Why it matters</p>
+          <h2>Fence permits are a small process with a big tax on everyone's time.</h2>
+          <p>Rules vary by zone, lot type, and material. Applications get rejected for fixable reasons. City staff spend their days on back-and-forth that should never have left the kitchen table.</p>
+        </div>
+
+        <div class="compare">
+          <div class="compare__col fade-up">
+            <h3>The problem</h3>
+            <ul>
+              <li>Fence permit rules are confusing for homeowners</li>
+              <li>Incorrect applications lead to rejections and delays</li>
+              <li>City staff spend time on avoidable back-and-forth</li>
+              <li>Rules vary by zone, lot type, and material</li>
+              <li>Contractors waste billable hours on paperwork</li>
+            </ul>
+          </div>
+          <div class="compare__col fade-up" style="transition-delay:80ms">
+            <h3>With Fence Genie</h3>
+            <ul>
+              <li>Step-by-step guided fence plan creation</li>
+              <li>Automatic compliance check before submission</li>
+              <li>Submission-ready permit package generated instantly</li>
+              <li>City-side review automated and accelerated</li>
+              <li>Fewer rejections, faster approvals</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ KEY FEATURES ═══════════════════════════════════════════ -->
+    <section class="section section--alt" id="features">
+      <div class="container">
+        <div class="section__head fade-up">
+          <p class="eyebrow">Key features</p>
+          <h2>The whole permit lifecycle, automated end-to-end.</h2>
+        </div>
+
+        <div class="features">
+          <div class="feature-pill fade-up"><span class="feature-pill__dot"></span><span>Guided fence plan creation — walks users step by step</span></div>
+          <div class="feature-pill fade-up" style="transition-delay:40ms"><span class="feature-pill__dot"></span><span>Automated zoning compliance: height, setbacks, materials</span></div>
+          <div class="feature-pill fade-up" style="transition-delay:80ms"><span class="feature-pill__dot"></span><span>Instant permit readiness scoring before submission</span></div>
+          <div class="feature-pill fade-up" style="transition-delay:120ms"><span class="feature-pill__dot"></span><span>Submission-ready permit package generated automatically</span></div>
+          <div class="feature-pill fade-up" style="transition-delay:160ms"><span class="feature-pill__dot"></span><span>City-side review automation for faster approvals</span></div>
+          <div class="feature-pill fade-up" style="transition-delay:200ms"><span class="feature-pill__dot"></span><span>Works for residential, commercial, and municipal projects</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ THREE AUDIENCES ════════════════════════════════════════ -->
+    <section class="section" id="audiences">
+      <div class="container">
+        <div class="section__head fade-up">
+          <p class="eyebrow">Three audiences, one tool</p>
+          <h2>Built for everyone in the fence permit chain.</h2>
+          <p>Fence Genie isn't a homeowner tool with contractor crumbs bolted on. Each of the three sides has a workflow designed for it — and the data flows between them so nobody re-types anything.</p>
+        </div>
+
+        <div class="audiences">
+          <div class="audience fade-up">
+            <h3>Property Owners</h3>
+            <p>Homeowners who want to install a fence without navigating confusing permit requirements.</p>
+          </div>
+          <div class="audience fade-up" style="transition-delay:80ms">
+            <h3>Fence Companies</h3>
+            <p>Contractors who want to streamline permitting for every job and reduce costly rework.</p>
+          </div>
+          <div class="audience fade-up" style="transition-delay:160ms">
+            <h3>Municipalities</h3>
+            <p>City permit offices that want fewer incomplete applications and faster review cycles.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CTA ═════════════════════════════════════════════════════ -->
+    <section class="cta" id="early-access">
+      <div class="container">
+        <div class="cta__inner fade-up">
+          <p class="eyebrow">Get early access</p>
+          <h2>Be first when Fence Genie goes live.</h2>
+          <p>We're almost live. If you're a property owner, fencing contractor, or city permit office that wants to skip the headache, drop your email and we'll bring you in early.</p>
+
+          <form class="cta__form" id="fg-form" novalidate>
+            <input type="email" required placeholder="you@email.com" aria-label="Email" autocomplete="email">
+            <button type="submit" class="btn btn--primary">Get Early Access →</button>
+          </form>
+          <p class="cta__note">We'll only contact you about Fence Genie. No newsletter, no general updates.</p>
+          <p class="cta__success" id="fg-success">✓ Thanks — you're on the early-access list. We'll be in touch.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══ FOOTER ═══════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <a class="footer__brand" href="../index.html" aria-label="ASAP home">
+          <img src="../asap-logo-official-transparent.png" alt="ASAP">
+        </a>
+        <ul class="footer__links">
+          <li><a href="zone-genie.html">Zone Genie</a></li>
+          <li><a href="site-genie.html">Site Genie</a></li>
+          <li><a href="fence-genie.html">Fence Genie</a></li>
+          <li><a href="../index.html">Platform</a></li>
+        </ul>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2026 Applied Spatial Analytics Platform LLC. All rights reserved.</p>
+        <p class="footer__tag">asapgenie.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+      }, { threshold: 0.08 });
+      document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+    } else {
+      document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+    }
+    const form = document.getElementById('fg-form');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      form.style.display = 'none';
+      document.getElementById('fg-success').classList.add('show');
+    });
+  </script>
+</body>
+</html>

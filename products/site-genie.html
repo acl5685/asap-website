@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Site Genie — Find the Right Site Before Your Competitors Do | ASAP</title>
+<meta name="description" content="Site Genie uses AI and spatial intelligence to analyze zoning, parcel data, and development feasibility — surfacing the best sites instantly.">
+<link rel="icon" href="../favicon.svg">
+<link rel="stylesheet" href="_landing.css">
+<style>
+  /* Site Genie theme — DESIGN.md §3B — lime green */
+  :root {
+    --p-primary: #5ec42a;
+    --p-dark:    #1a5a22;
+    --p-mid:     #2d8a38;
+    --p-accent:  #78c820;
+    --p-bg:      #f2f9f0;
+    --p-text:    #1a2e1c;
+  }
+
+  /* Hero pace tagline */
+  .hero__pace {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--p-primary);
+    font-size: 1rem;
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+  }
+
+  /* In-development pill */
+  .status-pill--dev {
+    background: color-mix(in srgb, #f4c430 22%, white);
+    border-color: color-mix(in srgb, #d4a020 38%, transparent);
+    color: #8a6b00;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .status-pill--dev .status-pill__dot { background: #d4a020; }
+
+  /* Promise dark-green lead block */
+  .promise {
+    background: var(--p-dark);
+    color: #fff;
+    border-radius: 16px;
+    padding: clamp(32px, 4vw, 48px);
+    margin-top: 56px;
+  }
+  .promise h2 {
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .promise p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.84);
+    line-height: 1.65;
+    max-width: 68ch;
+  }
+
+  /* Coming-soon banner */
+  .waitlist-banner {
+    margin-top: 28px;
+    padding: 16px 22px;
+    background: color-mix(in srgb, #f4c430 14%, white);
+    border: 1.5px dashed color-mix(in srgb, #d4a020 50%, transparent);
+    border-radius: 10px;
+    font-size: 0.92rem;
+    color: var(--p-text);
+    line-height: 1.5;
+  }
+  .waitlist-banner strong {
+    color: #b07410;
+    font-weight: 700;
+  }
+
+  /* Compare two-column */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  @media (max-width: 760px) { .compare { grid-template-columns: 1fr; } }
+  .compare__col {
+    background: color-mix(in srgb, var(--p-primary) 5%, white);
+    border-left: 3px solid var(--p-primary);
+    border-radius: 12px;
+    padding: 26px 28px;
+  }
+  .compare__col h3 {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--p-dark);
+    margin-bottom: 14px;
+  }
+  .compare__col ul { list-style: none; padding: 0; }
+  .compare__col li {
+    font-size: 0.92rem;
+    color: var(--p-text);
+    line-height: 1.55;
+    padding: 7px 0;
+    padding-left: 14px;
+    position: relative;
+  }
+  .compare__col li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--p-primary);
+    font-weight: 700;
+  }
+
+  /* Feature pills */
+  .features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 760px) { .features { grid-template-columns: 1fr; } }
+  .feature-pill {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 20px;
+    background: color-mix(in srgb, var(--p-primary) 10%, white);
+    border-radius: 10px;
+    font-size: 0.92rem;
+    color: var(--p-text);
+    line-height: 1.5;
+  }
+  .feature-pill__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--p-primary);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  /* Audience pill row */
+  .audience-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .audience-pill {
+    padding: 10px 22px;
+    border: 1.5px solid var(--p-primary);
+    border-radius: 50px;
+    background: #fff;
+    color: var(--p-dark);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.92rem;
+    letter-spacing: -0.005em;
+  }
+</style>
+</head>
+<body>
+
+  <!-- ═══ NAV ═══════════════════════════════════════════════════════ -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <div class="nav__inner">
+        <a class="nav__logo" href="../index.html" aria-label="ASAP home">
+          <img src="../asap-logo-official-transparent.png" alt="ASAP">
+        </a>
+        <div class="nav__crumb">
+          <span class="nav__crumb-sep"></span>
+          <span class="nav__crumb-product">Site Genie</span>
+        </div>
+        <ul class="nav__links">
+          <li><a href="#problem">The problem</a></li>
+          <li><a href="#features">Planned features</a></li>
+          <li><a href="#audiences">Who it's for</a></li>
+          <li><a href="../index.html#suite">Other products</a></li>
+        </ul>
+        <div class="nav__cta">
+          <a class="btn btn--primary" href="#waitlist">Join Waitlist</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ═══ HERO ════════════════════════════════════════════════════ -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero__inner">
+          <div class="status-pill status-pill--dev">
+            <span class="status-pill__dot"></span>
+            In Development
+          </div>
+          <p class="hero__pace">The New Pace of Progress</p>
+          <h1>Find the Right Site — <em>Before Your Competitors Do.</em></h1>
+          <p class="hero__sub">Site Genie uses AI and spatial intelligence to analyze zoning, parcel data, and development feasibility — surfacing the best sites instantly so developers can move faster and make smarter decisions.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#waitlist">Join the Waitlist</a>
+            <a class="btn btn--outline" href="#features">See planned features</a>
+          </div>
+
+          <div class="waitlist-banner">
+            <strong>Coming Soon</strong> — Site Genie is currently in development. Join the waitlist to be first to access early access and pilot pricing.
+          </div>
+
+          <div class="promise">
+            <h2>The site-selection desk you'd hire — for every parcel, on demand.</h2>
+            <p>Stop spending Tuesdays pulling parcel data and Thursdays cross-referencing FEMA panels. Site Genie does it once, fast, with the sources cited — so your team can spend its time on the deals that need judgment.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PROBLEM / WITH SITE GENIE ═════════════════════════════ -->
+    <section class="section" id="problem">
+      <div class="container">
+        <div class="section__head fade-up">
+          <p class="eyebrow">Why it matters</p>
+          <h2>Site selection is the slowest, most error-prone part of development.</h2>
+          <p>The deals you win are the ones you find first. The deals you lose money on are the ones whose boundaries you didn't read carefully enough. Site Genie compresses both into a single workflow.</p>
+        </div>
+
+        <div class="compare">
+          <div class="compare__col fade-up">
+            <h3>The problem</h3>
+            <ul>
+              <li>Site selection requires hours of manual research</li>
+              <li>Zoning compatibility varies by parcel and is complex</li>
+              <li>Developers miss opportunities due to slow analysis</li>
+              <li>Cross-referencing spatial data is error-prone</li>
+              <li>No single tool brings it all together</li>
+            </ul>
+          </div>
+          <div class="compare__col fade-up" style="transition-delay:80ms">
+            <h3>With Site Genie</h3>
+            <ul>
+              <li>AI-powered site scoring in seconds</li>
+              <li>Instant zoning compatibility checks per parcel</li>
+              <li>Spatial overlays reveal hidden opportunities</li>
+              <li>Development feasibility assessed automatically</li>
+              <li>Integrated with the full ASAP platform</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PLANNED KEY FEATURES ═════════════════════════════════ -->
+    <section class="section section--alt" id="features">
+      <div class="container">
+        <div class="section__head fade-up">
+          <p class="eyebrow">Planned key features</p>
+          <h2>The acquisitions desk, on demand.</h2>
+        </div>
+
+        <div class="features">
+          <div class="feature-pill fade-up"><span class="feature-pill__dot"></span><span>AI-powered site scoring and ranking by development potential</span></div>
+          <div class="feature-pill fade-up" style="transition-delay:40ms"><span class="feature-pill__dot"></span><span>Zoning compatibility analysis per parcel, automatically checked</span></div>
+          <div class="feature-pill fade-up" style="transition-delay:80ms"><span class="feature-pill__dot"></span><span>Spatial overlays: utilities, flood zones, transit, demographics</span></div>
+          <div class="feature-pill fade-up" style="transition-delay:120ms"><span class="feature-pill__dot"></span><span>Development feasibility assessments with clear outputs</span></div>
+          <div class="feature-pill fade-up" style="transition-delay:160ms"><span class="feature-pill__dot"></span><span>Portfolio-level site comparison and shortlisting tools</span></div>
+          <div class="feature-pill fade-up" style="transition-delay:200ms"><span class="feature-pill__dot"></span><span>Seamless integration with Zone Genie and ASAP platform</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ WHO IT'S FOR ═══════════════════════════════════════════ -->
+    <section class="section" id="audiences">
+      <div class="container">
+        <div class="section__head fade-up">
+          <p class="eyebrow">Who it's built for</p>
+          <h2>Anyone whose job depends on picking the right parcel.</h2>
+          <p>Six core audiences live in feasibility analysis. Site Genie is being designed so each of them can pull the answer they need without re-learning the tool.</p>
+        </div>
+
+        <div class="audience-pills fade-up">
+          <span class="audience-pill">Real Estate Developers</span>
+          <span class="audience-pill">Site Selectors</span>
+          <span class="audience-pill">Capital Planners</span>
+          <span class="audience-pill">Urban Planners</span>
+          <span class="audience-pill">Municipal Teams</span>
+          <span class="audience-pill">Investment Teams</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ WAITLIST ════════════════════════════════════════════════ -->
+    <section class="cta" id="waitlist">
+      <div class="container">
+        <div class="cta__inner fade-up">
+          <p class="eyebrow">Join the waitlist</p>
+          <h2>Be first when Site Genie opens up.</h2>
+          <p>Early-access partners get pilot pricing and shape the product roadmap. If you're a developer, site selector, or planning team that wants in, drop your email below.</p>
+
+          <form class="cta__form" id="sg-form" novalidate>
+            <input type="email" required placeholder="you@yourfirm.com" aria-label="Work email" autocomplete="email">
+            <button type="submit" class="btn btn--primary">Join the Waitlist →</button>
+          </form>
+          <p class="cta__note">We'll only contact you about Site Genie. No newsletter, no general updates.</p>
+          <p class="cta__success" id="sg-success">✓ You're on the waitlist. We'll be in touch when early access opens.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══ FOOTER ═══════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <a class="footer__brand" href="../index.html" aria-label="ASAP home">
+          <img src="../asap-logo-official-transparent.png" alt="ASAP">
+        </a>
+        <ul class="footer__links">
+          <li><a href="zone-genie.html">Zone Genie</a></li>
+          <li><a href="site-genie.html">Site Genie</a></li>
+          <li><a href="fence-genie.html">Fence Genie</a></li>
+          <li><a href="../index.html">Platform</a></li>
+        </ul>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2026 Applied Spatial Analytics Platform LLC. All rights reserved.</p>
+        <p class="footer__tag">asapgenie.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+      }, { threshold: 0.08 });
+      document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+    } else {
+      document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+    }
+    const form = document.getElementById('sg-form');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      form.style.display = 'none';
+      document.getElementById('sg-success').classList.add('show');
+    });
+  </script>
+</body>
+</html>

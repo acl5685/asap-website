@@ -111,6 +111,7 @@
       padding: 8px 0;
     }
 
+
     .nav__inner {
       display: flex;
       align-items: center;
@@ -139,8 +140,9 @@
     .nav__links {
       display: flex;
       align-items: center;
-      gap: 32px;
+      gap: 28px;
       list-style: none;
+      flex-shrink: 0;
     }
 
     .nav__links a {
@@ -1052,6 +1054,16 @@
       transition: color 150ms var(--ease-out);
     }
 
+    .footer__social {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer__social svg { display: block; }
+      transition: color 150ms var(--ease-out);
+    }
+
     @media (hover: hover) and (pointer: fine) {
       .footer__links a:hover { color: var(--text-secondary); }
     }
@@ -1135,7 +1147,7 @@
   <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
     <div class="container">
       <div class="nav__inner">
-        <a class="nav__logo" href="/" aria-label="ASAP — Applied Spatial Analytics Platform (home)">
+        <a class="nav__logo" href="index.html" aria-label="ASAP — Applied Spatial Analytics Platform (home)">
           <img src="asap-logo-official-white-wordmark.png" alt="ASAP">
         </a>
 
@@ -1329,26 +1341,26 @@
         </div>
 
         <div class="suite__grid">
-          <div class="suite-card suite-card--active suite-card--zg fade-up">
-            <div class="suite-card__mark suite-card__mark--zg" aria-label="Zone Genie logo mark"><img src="zone-genie-lamp.png" alt=""></div>
+          <a class="suite-card suite-card--active suite-card--zg fade-up" href="products/zone-genie.html">
+              <div class="suite-card__mark suite-card__mark--zg" aria-label="Zone Genie logo mark"><img src="zone-genie-lamp.png" alt=""></div>
             <div class="suite-card__status suite-card__status--live">Live</div>
             <h3>Zone Genie</h3>
             <p>AI-powered zoning and permit compliance review for municipal planning departments. Reduces review time from weeks to minutes.</p>
-          </div>
+          </a>
 
-          <div class="suite-card suite-card--pipeline suite-card--sg fade-up" style="transition-delay:80ms;">
+          <a class="suite-card suite-card--pipeline suite-card--sg fade-up" href="products/site-genie.html" style="transition-delay:80ms;">
             <div class="suite-card__mark suite-card__mark--sg" aria-label="Site Genie logo mark"><img src="site-genie-lamp.png" alt=""></div>
             <div class="suite-card__status suite-card__status--pipeline">Coming Soon</div>
             <h3>Site Genie</h3>
             <p>AI-powered site selection and development feasibility analysis for real estate developers. Know what's buildable before you bid.</p>
-          </div>
+          </a>
 
-          <div class="suite-card suite-card--pipeline suite-card--fg fade-up" style="transition-delay:160ms;">
+          <a class="suite-card suite-card--pipeline suite-card--fg fade-up" href="products/fence-genie.html" style="transition-delay:160ms;">
             <div class="suite-card__mark suite-card__mark--fg" aria-label="Fence Genie logo mark"><img src="fence-genie-lamp.png" alt=""></div>
             <div class="suite-card__status suite-card__status--pipeline">Coming Soon</div>
             <h3>Fence Genie</h3>
             <p>Homeowner-facing fence permit and site plan generator. Instant setback guidance and permit-ready documents for any parcel.</p>
-          </div>
+          </a>
         </div>
       </div>
     </section>
@@ -1376,7 +1388,8 @@
                   Demo request submissions are routed to: andie@asapgenie.com
                   Backend: Formspree. To change recipient, log in at formspree.io,
                   open this form's settings, and update the email address.
-                  The _to field below only works on Formspree paid plans.
+                  The Formspree form ID below currently points to the original
+                  recipient — swap it for a new form ID created under andie@.
               -->
               <form id="demo-form" action="https://formspree.io/f/mvzvqpww" method="POST" novalidate>
                 <input type="hidden" name="_subject" value="ASAP — Zone Genie Demo Request">
@@ -1436,6 +1449,8 @@
                 <div class="form-submit">
                   <button type="submit" class="btn btn--primary">Request Demo →</button>
                 </div>
+                <p class="form-note">
+</p>
               </form>
 
               <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
@@ -1454,6 +1469,16 @@
       <div class="footer__inner">
         <a class="footer__brand" href="/" aria-label="ASAP home">
           <img src="asap-logo-official-white-wordmark.png" alt="ASAP" style="height:72px;width:auto;">
+          <!-- legacy mark below kept for reference; hidden
+          <svg width="28" height="28" viewBox="0 0 36 36" fill="none" aria-hidden="true" style="display:none">
+            <circle cx="18" cy="18" r="16" stroke="#3db5a6" stroke-width="1.5"/>
+            <ellipse cx="18" cy="18" rx="8" ry="16" stroke="#3db5a6" stroke-width="1.5"/>
+            <line x1="2" y1="18" x2="34" y2="18" stroke="#3db5a6" stroke-width="1.5"/>
+            <line x1="4.5" y1="10.5" x2="31.5" y2="10.5" stroke="#3db5a6" stroke-width="1.5"/>
+            <line x1="4.5" y1="25.5" x2="31.5" y2="25.5" stroke="#3db5a6" stroke-width="1.5"/>
+          </svg>
+          <span style="display:none;">ASAP</span>
+          -->
         </a>
 
         <ul class="footer__links">
@@ -1461,6 +1486,15 @@
           <li><a href="#suite">Products</a></li>
           <li><a href="#demo">Demo</a></li>
           <li><a href="mailto:hello@asapgenie.com">Contact</a></li>
+          <li>
+            <!-- TODO: replace # with the real LinkedIn company URL, e.g. https://www.linkedin.com/company/asapgenie/ -->
+            <a href="https://www.linkedin.com/company/asapgenie/" target="_blank" rel="noopener" aria-label="ASAP on LinkedIn" class="footer__social">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M19 3A2 2 0 0 1 21 5v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18.34v-7.86H5.67v7.86h2.67zM7 9.34a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1zm11.34 9V14a3.13 3.13 0 0 0-3.13-3.66 2.7 2.7 0 0 0-2.46 1.35v-1.16H10.1c.04.75 0 7.86 0 7.86h2.67v-4.39a1.83 1.83 0 0 1 .09-.65 1.46 1.46 0 0 1 1.37-.98c.97 0 1.36.74 1.36 1.83v4.19h2.67z"/>
+              </svg>
+              <span class="footer__social-label">LinkedIn</span>
+            </a>
+          </li>
         </ul>
       </div>
 
